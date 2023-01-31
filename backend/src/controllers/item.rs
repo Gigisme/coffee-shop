@@ -3,10 +3,9 @@ use sea_orm::{ActiveModelTrait, Set};
 
 use crate::{db, entities};
 
-pub async fn insert(item: web::Json<entities::item::Model>) {
-    let item_clone = item.clone();
+pub async fn insert(item: web::Json<entities::item::ModelNoId>) {
     let item = entities::item::ActiveModel {
-        name: Set(item_clone.name),
+        name: Set(item.name.clone()),
         price: Set(item.price),
         weight: Set(item.weight),
         rating: Set(item.rating),

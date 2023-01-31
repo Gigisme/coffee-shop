@@ -1,6 +1,6 @@
-use actix_web::{get, App, HttpResponse, HttpServer, Responder};
-use sea_orm::{ActiveModelTrait, Database, Set};
+use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 
+mod controllers;
 mod db;
 mod entities;
 
@@ -9,24 +9,15 @@ async fn hello() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
 }
 
+#[post("/")]
+async fn submit(insert_item: web::Json<entities::item::Model>) -> String {
+    controllers::item::insert(insert_item).await;
+    "successful insert".to_string()
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let db = Database::connect("sqlite:./sqlite.db?mode=rwc")
-        .await
-        .unwrap();
-
-    let item = entities::item::ActiveModel {
-        name: Set("test".to_owned()),
-        price: Set(0.0),
-        weight: Set(0.0),
-        rating: Set(0.0),
-        description: Set(None),
-        ..Default::default()
-    };
-
-    let test_item: entities::item::Model = item.insert(&db).await.unwrap();
-
-    HttpServer::new(|| App::new().service(hello))
+    HttpServer::new(|| App::new().service(hello).service(submit))
         .bind(("127.0.0.1", 8000))?
         .run()
         .await

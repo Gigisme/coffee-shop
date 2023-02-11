@@ -3,6 +3,8 @@
 */dist-ssr
 */*.local
 **/target
+*/*.sqlite
+*/*.db
 
 
 .DS_Store

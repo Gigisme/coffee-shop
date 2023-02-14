@@ -26,39 +26,85 @@
   };
 </script>
 
-<form
-  on:submit|preventDefault={handle}
-  class="bg-grey-50 rounded shadow-md px-8 dark:bg-sky-900"
->
-  <div>
-    <label>
-      Name:
-      <input type="text" bind:value={itemName} />
-    </label>
+<div class="flex items-center justify-center p-12">
+  <div class="mx-auto w-full max-w-[550px] bg-sky-900 p-4 rounded">
+    <form on:submit|preventDefault={handle}>
+      <div class="mb-5">
+        <label
+          for="name"
+          class="mb-3 block text-base font-medium text-[#07074D] dark:text-sky-50"
+        >
+          Name
+        </label>
+        <input
+          id="name"
+          type="text"
+          required
+          bind:value={itemName}
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+      </div>
+      <div class="mb-5">
+        <label
+          for="desc"
+          class="mb-3 block text-base font-medium text-[#07074D] dark:text-sky-50"
+        >
+          Description
+        </label>
+        <textarea
+          id="desc"
+          bind:value={description}
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+      </div>
+      <div class="mb-5">
+        <label
+          for="price"
+          class="mb-3 block text-base font-medium text-[#07074D] dark:text-sky-50"
+        >
+          Price
+        </label>
+        <input
+          id="price"
+          required
+          bind:value={price}
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+      </div>
+      <div class="mb-5">
+        <label
+          for="weight"
+          class="mb-3 block text-base font-medium text-[#07074D] dark:text-sky-50"
+        >
+          Weight
+        </label>
+        <input
+          id="weight"
+          required
+          bind:value={weight}
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+      </div>
+      <div class="mb-5">
+        <label
+          for="rating"
+          class="mb-3 block text-base font-medium text-[#07074D] dark:text-sky-50"
+        >
+          Rating
+        </label>
+        <input
+          id="rating"
+          bind:value={rating}
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+      </div>
+      <div>
+        <button
+          class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
   </div>
-  <div>
-    <label>
-      Desc:
-      <input type="text" bind:value={description} />
-    </label>
-  </div>
-  <div>
-    <label>
-      Price:
-      <input type="number" bind:value={price} />
-    </label>
-  </div>
-  <div>
-    <label>
-      Weight:
-      <input type="number" bind:value={weight} />
-    </label>
-  </div>
-  <div>
-    <label>
-      Rating:
-      <input type="number" bind:value={rating} />
-    </label>
-  </div>
-  <button>Add item</button>
-</form>
+</div>

@@ -16,12 +16,11 @@ pub struct Model {
 }
 
 #[derive(Serialize, Deserialize, Clone)]
-pub struct ModelNoId {
+pub struct ModelInsert {
     pub name: String,
     pub description: Option<String>,
     pub price: f64,
     pub weight: f64,
-    pub rating: f64,
 }
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {}

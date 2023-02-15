@@ -3,9 +3,12 @@ use actix_web::{get, http::header::ContentType, post, web, HttpResponse};
 
 // TODO: make a proper response
 #[post("/insertItem")]
-async fn submit(insert_item: web::Json<entities::item::ModelNoId>) -> String {
-    controllers::item::insert(insert_item).await;
-    "successful insert".to_string()
+async fn submit(insert_item: web::Json<entities::item::ModelInsert>) -> HttpResponse {
+    let result = controllers::item::insert(insert_item).await;
+    match result {
+        Ok(msg) => HttpResponse::Ok().body(msg),
+        Err(err) => HttpResponse::InternalServerError().body(err.to_string()),
+    }
 }
 
 #[get("/items")]
